@@ -1,0 +1,37 @@
+#login-section {
+    display: block;
+    margin: auto;
+
+    background-color: blueviolet;
+    padding: 20px;
+    max-width: 500px;
+
+    text-align: center;
+}
+
+#login-section h2 {
+    margin: 10px;
+}
+
+#login-section form div {
+    margin: auto;
+
+    padding: 5px;
+
+    max-width: 50%;
+}
+
+.input {
+    display: flex;
+    justify-content: space-between;
+}
+
+#login-button {
+    display: block;
+    margin: auto;
+}
+
+#login-button button {
+    background-color: blue;
+    padding: 15px 30px;
+}
