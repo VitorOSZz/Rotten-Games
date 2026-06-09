@@ -14,22 +14,7 @@ def index():
 @bp.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        
-        email = request.form["email"]
-        first_password = request.form["first_password"]
-        second_password = request.form["second_password"]
-        
-        if first_password != second_password:
-            return "Passwords isn't the same."
-        
-        try:
-            register_user(email, first_password)
-        except ValueError as ex:
-            # Implement a new html/pop up for this email already exist in the database.
-            return str(ex)
-        
-        return redirect(url_for("main.login"))
-
+        register()
     return render_template("register.html")
 
 @bp.route("/login")
