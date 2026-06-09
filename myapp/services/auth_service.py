@@ -1,4 +1,3 @@
-from flask import redirect, url_for, request
 from myapp.supabase import supabase
 from myapp.extensions import bcrypt
 
@@ -25,20 +24,3 @@ def register_user(email, password):
             "password_hash": hashed_password, 
             "role": "user"}).execute()
         return True
-    
-def register():
-
-    email = request.form["email"]
-    first_password = request.form["first_password"]
-    second_password = request.form["second_password"]
-        
-    if first_password != second_password:
-        return "Passwords isn't the same."
-    
-    try:
-        register_user(email, first_password)
-    except ValueError as ex:
-        # Implement a new html/pop up for this email already exist in the database.
-        return str(ex)
-    
-    return redirect(url_for("main.login"))
