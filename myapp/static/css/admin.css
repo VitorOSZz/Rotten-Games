@@ -1,4 +1,77 @@
+:root {
+    --blue: rgba(0, 0, 255, 0.466);
+}
+
 main {
     display: grid;
-    grid-template-columns: 10%, repeat(2, auto), 10%;
+    grid-template-columns: 3% repeat(2, auto) 3%;
+    gap: 15px;
+
+    margin-top: 15px;
+}
+
+#change_role,
+#games_database {
+    height: 400px;
+    background-color: gray;
+}
+
+#change_role {
+    grid-column: 2;
+
+}
+
+#change_role h2,
+#games_database h2 {
+    margin-bottom: 15px;
+}
+
+#change_role>div,
+#games_database>div {
+    background-color: var(--blue);
+
+    height: 250px;
+    width: 80%;
+
+    margin: auto;
+    text-align: center;
+}
+
+#role_input {
+    text-align: center;
+    width: 300px;
+    height: 30px;
+}
+
+.input {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 10px auto;
+
+    background-color: green;
+}
+
+.input .input-medium-size {
+    width: 250px;
+}
+
+#change_role .input,
+#games_database .input {
+    width: 75%;
+}
+
+#button_send input {
+    height: 50px;
+    width: 100px;
+
+    margin: auto;
+}
+
+#games_database {
+    grid-column: 3;
+}
+
+form {
+    font-size: 23px;
 }

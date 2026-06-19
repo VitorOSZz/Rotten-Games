@@ -7,6 +7,27 @@ bp = Blueprint("main", __name__)
 def health():
     return jsonify({"status": "ok"})
 
+@bp.route("/admin_painel/<action>", methods=["GET", "POST"])
+def admin_painel(action):
+    from flask import session
+    if not "email" in session:
+        return "Boboca"
+    
+    from .services.auth_service import is_admin
+    if not is_admin(session["email"]):
+        return "Boboca 2"
+    
+    if request.method == "POST":
+        if action == "change_role":
+            from .services.admin_Service import set_role
+            set_role()
+        elif action == "games_database":
+            from .services.admin_Service import add_game_to_DB
+            add_game_to_DB()
+    
+    from .services.generate_pages import generate_admin
+    return generate_admin()
+
 @bp.route("/")
 def index():
     from flask import session
@@ -16,8 +37,7 @@ def index():
             from .services.generate_pages import generate_home
             return generate_home()
         elif session["role"] == "admin":
-            from .services.generate_pages import generate_admin
-            return generate_admin()
+            return admin_painel("")
     
     return render_template("login.html")
 
@@ -27,7 +47,7 @@ def register():
         from .services.auth_service import try_register_user
         
         return try_register_user()
-
+    
     return render_template("register.html")
 
 @bp.route("/login", methods=["GET", "POST"])

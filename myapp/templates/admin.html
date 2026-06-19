@@ -15,10 +15,69 @@
     <h1>Hello, {{admin_name}}</h1>
 
     <main>
-        <div></div> <!-- Space-->
-        <div id="change_role"></div>
-        <div id="games_database"></div>
-        <div></div> <!-- Space-->
+        <div id="change_role">
+            <div>
+                <div>
+                    <h2>Change role of an user</h2>
+                </div>
+                <div>
+                    <form action="/admin_painel/change_role" method="post">
+                        <div class="input">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" id="role_input" class="input-medium-size">
+                        </div>
+
+                        <div class="input">
+                            <label for="role">Role</label>
+                            <select name="role" id="role_input">
+                                <option value="user">User</option>
+                                <option value="specialist">Specialist</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+
+                        <div class="input" id="button_send">
+                            <input type="submit" value="Change">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="games_database">
+            <div>
+                <div>
+                    <h2>Add a game to our database</h2>
+                </div>
+                <div>
+                    <form action="/admin_painel/games_database" method="post">
+                        <div class="input">
+                            <label for="game_name">Game name</label>
+                            <input type="text" name="game_name" id="" class="input-medium-size">
+                        </div>
+
+                        <div class="input">
+                            <label for="publisher">Publisher</label>
+                            <input type="text" name="publisher" id="" class="input-medium-size">
+                        </div>
+
+                        <div class="input">
+                            <label for="year_release">Year release</label>
+                            <input type="number" name="year_release" id="" class="input-medium-size">
+                        </div>
+
+                        <div class="input">
+                            <label for="game_genres">Genre</label>
+                            <input type="text" name="game_genres" id="" class="input-medium-size">
+                        </div>
+
+                        <div class="input" id="button_send">
+                            <input type="submit" value="Add">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main>
 </body>
 

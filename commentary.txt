@@ -1,0 +1,5 @@
+if an user login with a "user account" and go to rotten-games/admin_painel will return "Boboca 3"
+
+    if "email" in request.form:
+        if not is_admin(request.form["email"]):
+            return "Boboca 2"

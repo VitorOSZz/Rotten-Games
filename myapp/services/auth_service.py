@@ -3,9 +3,11 @@ from myapp.extensions import bcrypt
 
 def find_user_by_email(email): 
     response = (
-        supabase.table("users")
+        supabase
+        .table("users")
         .select("*")
         .eq("email", email)
+        .limit(1)
         .execute()
     )
 
@@ -57,14 +59,7 @@ def try_login():
     email = request.form["email"]
     password = request.form["password"]
     
-    response = (
-        supabase
-        .table("users")
-        .select("*")
-        .eq("email", email)
-        .limit(1)
-        .execute()
-    )
+    response = find_user_by_email(email)
     # Email not exist in database.
     if not response.data:
         return "User not found."
@@ -80,3 +75,12 @@ def try_login():
     session["email"] = user["email"]
 
     return redirect("/")
+
+def is_admin(email: str):
+    response = find_user_by_email(email)
+    
+    if not response.data:
+        return False
+    user = response.data[0]
+    
+    return user["role"] == "admin"

@@ -29,5 +29,4 @@ def generate_admin():
     )
 
     user = response.data[0]
-
     return render_template("admin.html", admin_name=user["name"])
