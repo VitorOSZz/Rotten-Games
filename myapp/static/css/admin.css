@@ -1,0 +1,4 @@
+main {
+    display: grid;
+    grid-template-columns: 10%, repeat(2, auto), 10%;
+}

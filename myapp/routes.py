@@ -9,7 +9,17 @@ def health():
 
 @bp.route("/")
 def index():
-    return render_template("index.html")
+    from flask import session
+
+    if "role" in session:
+        if session["role"] == "user" or session["role"] == "specialist":
+            from .services.generate_pages import generate_home
+            return generate_home()
+        elif session["role"] == "admin":
+            from .services.generate_pages import generate_admin
+            return generate_admin()
+    
+    return render_template("login.html")
 
 @bp.route("/register", methods=["GET", "POST"])
 def register():
