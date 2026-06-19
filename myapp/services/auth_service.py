@@ -21,7 +21,7 @@ def register_user(name: str, email: str, password: str):
         
         supabase.table("users").insert({
             "name": name,
-            "email": email, 
+            "email": email.lower(), 
             "password_hash": hashed_password, 
             "role": "user"}).execute()
         return True
