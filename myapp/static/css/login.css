@@ -35,3 +35,13 @@
     background-color: blue;
     padding: 15px 30px;
 }
+
+#games-cards {
+    display: flex;
+    justify-content: space-around;
+}
+
+#games-cards .card {
+
+    display: inline-block;
+}

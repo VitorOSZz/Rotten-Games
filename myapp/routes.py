@@ -14,26 +14,20 @@ def index():
 @bp.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
+        from .services.auth_service import try_register_user
         
-        email = request.form["email"]
-        first_password = request.form["first_password"]
-        second_password = request.form["second_password"]
-        
-        if first_password != second_password:
-            return "Passwords isn't the same."
-        
-        try:
-            register_user(email, first_password)
-        except ValueError as ex:
-            # Implement a new html/pop up for this email already exist in the database.
-            return str(ex)
-        
-        return redirect(url_for("main.login"))
+        return try_register_user()
 
     return render_template("register.html")
 
-@bp.route("/login")
+@bp.route("/login", methods=["GET", "POST"])
 def login():
+    if request.method == "POST":
+        # admin go to admin painel
+        from .services.auth_service import try_login
+        
+        return try_login()
+    
     return render_template("login.html")
 
 @bp.route("/users")
