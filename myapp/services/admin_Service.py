@@ -22,10 +22,13 @@ def add_game_to_DB():
     
     from ..supabase import supabase
     game_name = request.form["game_name"]
+    from .general_functions import normalize
+    name_normalized = normalize(game_name)
     publisher = request.form["publisher"]
     developer = request.form["developer"]
     year_release = request.form["year_release"]
     game_genres = request.form["game_genres"]
+    image_link = request.form["image_link"]
     
     already_exist = supabase.table("games").select("game_name").eq("game_name", game_name).limit(1).execute()
     
@@ -33,19 +36,23 @@ def add_game_to_DB():
         # This game already exist
         supabase.table("games").update({
             "game_name": game_name,
+            "name_normalized": name_normalized,
             "publisher": publisher,
             "developer": developer,
             "year_release": year_release,
-            "genre": game_genres}).eq("game_name", game_name).execute()
+            "genre": game_genres,
+            "image_link": image_link}).eq("game_name", game_name).execute()
         
         return f"Change data about {game_name}"
     
     supabase.table("games").insert({
             "game_name": game_name,
+            "name_normalized": name_normalized,
             "publisher": publisher, 
             "developer": developer,
             "year_release": year_release, 
-            "genre": game_genres}).execute()
+            "genre": game_genres,
+            "image_link": image_link}).execute()
     
     game = supabase.table("games").select("game_name").eq("game_name", game_name).limit(1).execute()
     
