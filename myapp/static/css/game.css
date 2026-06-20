@@ -1,0 +1,235 @@
+@font-face {
+    font-family: 'pixel';
+    src: url(../font/04B_30__.TTF);
+}
+
+@font-face {
+    font-family: 'daytona';
+    src: url(../font/DaytonaPro-Light.ttf);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: radial-gradient(circle, rgb(31, 34, 39), rgb(13, 15, 18));
+}
+
+header {
+    background-color: rgb(36, 36, 36);
+    width: auto;
+    height: 70px;
+    justify-items: end;
+}
+
+header #logo img {
+    height: 75px;
+}
+
+main {
+    display: grid;
+    max-width: 100%;
+    grid-template-columns: 60% 40%;
+
+    align-items: center;
+    align-content: center;
+
+}
+
+#cover {
+    max-width: 300px;
+    max-height: 450px;
+    margin: auto;
+
+}
+
+#cover img {
+    width: 300px;
+    height: 450px;
+    border-radius: 20px;
+    object-fit: cover;
+    object-position: center;
+}
+
+#info {
+    width: 60%;
+    text-align: center;
+    padding-top: 30px;
+    justify-items: center;
+    margin: auto;
+}
+
+
+#game_title {
+    display: inline-block;
+    background-color: rgb(36, 36, 36);
+
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+#game_title h1 {
+    font-size: 50px;
+    font-family: daytona;
+    color: white;
+}
+
+#rating {
+    width: 600px;
+    height: 100px;
+    margin-top: 50px;
+    align-content: center;
+    justify-content: space-evenly;
+}
+
+#rating #critics_rate {
+    display: inline-flex;
+    width: 250px;
+    height: 99px;
+    margin-right: 10px;
+    align-items: center;
+    text-align: center;
+    padding-left: 10px;
+
+
+}
+
+#rating #critics_rate img {
+    display: inline;
+    height: 98px;
+}
+
+
+#rating #overall_rate {
+    display: inline-flex;
+    width: 250px;
+    height: 99px;
+    margin-left: 10px;
+    align-items: center;
+    text-align: center;
+    padding-left: 20px;
+}
+
+#rating #overall_rate img {
+    display: inline;
+    height: 98px;
+}
+
+#rating h1 {
+    font-family: pixel;
+    color: white;
+    font-size: 40px;
+}
+
+#description {
+    width: 700px;
+    height: auto;
+    background-color: rgb(36, 36, 36);
+    border-radius: 20px;
+    margin: 50px;
+    text-align: left;
+
+}
+
+#description h1 {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+
+    font-family: daytona;
+    color: gray;
+    font-size: 20px;
+
+    border: 2px, solid, gray;
+    border-right: 0px;
+    border-left: 0px;
+    border-top: 0px;
+
+
+}
+
+#description #genre {
+    border: 0px
+}
+
+#button {
+    background-color: red;
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+    align-items: center;
+    align-content: center;
+}
+
+#button p {
+    color: white;
+    font-family: daytona;
+    font-weight: bold;
+    font-size: 20px;
+
+}
+
+#reviews {
+    height: 500px;
+    width: 700px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.review {
+    background-color: rgb(38, 38, 38);
+    width: 650px;
+    margin: auto;
+    border-radius: 30px;
+}
+
+.review .top {
+    display: flex;
+    height: 70px;
+    width: 650px;
+    border-radius: 20px 20px 0px 0px;
+    padding-top: 8x;
+    padding-left: 10px;
+}
+
+.review .top .name {
+    font-family: daytona;
+    color: white;
+    width: 470px;
+    margin-top: 13px;
+    padding-left: 10px;
+}
+
+.review .top .grade {
+    display: flex;
+    margin-right: 20px;
+}
+
+.review .top .grade img {
+    width: 70px;
+    height: 70px;
+}
+
+.review .top .grade h1 {
+    font-family: daytona;
+    color: white;
+    margin-top: 13px;
+}
+
+.review .content {
+    width: 650px;
+    padding: 5px 20px 10px 20px;
+}
+
+.review .content p {
+    font-family: daytona;
+    font-size: 18px;
+    color: white;
+}

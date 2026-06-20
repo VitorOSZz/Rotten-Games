@@ -1,26 +1,55 @@
 def set_role():
-    from flask import request
+    from flask import request, session
     email = request.form["email"]
+    if "email" in session:
+        if session["email"] == email:
+            return "You can't change your role."
+    else:
+        return "Boboca 4"
+    
     role = request.form["role"]
     
     from .auth_service import find_user_by_email
-    
     from ..supabase import supabase
     
-    supabase.table("users").update({"role": role}).eq("email", email).execute()
+    if not find_user_by_email(email):
+        return "This user was not found"
     
+    supabase.table("users").update({"role": role}).eq("email", email).execute()
+    return "changed"
 def add_game_to_DB():
     from flask import request
     
+    from ..supabase import supabase
     game_name = request.form["game_name"]
     publisher = request.form["publisher"]
+    developer = request.form["developer"]
     year_release = request.form["year_release"]
     game_genres = request.form["game_genres"]
     
-    from ..supabase import supabase
+    already_exist = supabase.table("games").select("game_name").eq("game_name", game_name).limit(1).execute()
+    
+    if already_exist.data:
+        # This game already exist
+        supabase.table("games").update({
+            "game_name": game_name,
+            "publisher": publisher,
+            "developer": developer,
+            "year_release": year_release,
+            "genre": game_genres}).eq("game_name", game_name).execute()
+        
+        return f"Change data about {game_name}"
     
     supabase.table("games").insert({
             "game_name": game_name,
             "publisher": publisher, 
+            "developer": developer,
             "year_release": year_release, 
             "genre": game_genres}).execute()
+    
+    game = supabase.table("games").select("game_name").eq("game_name", game_name).limit(1).execute()
+    
+    if game.data:
+        return "Added"
+    
+    return "Not added"

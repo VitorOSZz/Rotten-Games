@@ -1,0 +1,32 @@
+main a {
+    all: unset;
+    cursor: pointer;
+}
+
+main .game_card {
+    display: flex;
+
+    justify-content: space-between;
+    background-color: gray;
+    width: 400px;
+    height: 100px;
+    margin: auto;
+    margin-top: 20px;
+    font-size: 18px;
+
+    border-radius: 15px;
+}
+
+main .game_card img {
+
+    width: 50%;
+    height: 100%;
+
+    overflow: hidden;
+    border-radius: 0px 15px 15px 0px;
+}
+
+main h2 {
+    width: 45%;
+    height: 100%;
+}

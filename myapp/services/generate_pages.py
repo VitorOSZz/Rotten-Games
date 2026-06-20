@@ -1,9 +1,15 @@
 def generate_home():
     from flask import render_template
-    from .SteamWebAPI_Service import get_MostPlayed_games, get_header_images, get_game_names
+    from .games_services.SteamWebAPI_Service import get_new_releases_games, get_game_names
     
-    games = get_MostPlayed_games()
-    header_images = get_header_images(games)
+    quantity_of_games = 5
+    games = get_new_releases_games(quantity_of_games)
+    print(games)
+    header_images = []
+    for i in range(quantity_of_games):
+        from .games_services.SteamWebAPI_Service import get_header_image
+        header_images.append(get_header_image(games[i]))
+    
     game_names = get_game_names(games)
     return render_template(
         "home.html",
@@ -30,3 +36,34 @@ def generate_admin():
 
     user = response.data[0]
     return render_template("admin.html", admin_name=user["name"])
+
+def generate_game(gameId="2215200"):
+    appId = gameId
+    url = f"https://store.steampowered.com/api/appdetails?appids={appId}"
+    
+    import requests
+    response = requests.get(url)
+        
+    game_data = response.json()[str(appId)]["data"]
+
+    game_name = game_data["name"]
+    publisher = game_data["publishers"][0]
+    developer = game_data["developers"][0]
+    year_release = int(game_data["release_date"]["date"][-4:])
+    genre = ", ".join(
+        genre["description"]
+        for genre in game_data["genres"]
+    )
+    
+    from .games_services.SteamWebAPI_Service import get_header_image
+    game_image = get_header_image(appId)
+    
+    from flask import render_template
+    return render_template(
+        "game.html",
+        game_name=game_name,
+        publisher=publisher,
+        developer=developer,
+        year_release=year_release,
+        game_image=game_image,
+        genre=genre)

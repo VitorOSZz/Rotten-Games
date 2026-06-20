@@ -81,16 +81,20 @@ header {
 .game_banner {
     width: 200px;
     height: 300px;
-    border-radius: 25px;
-    background-color: red;
     overflow: hidden;
+    position: relative;
+    border-radius: 15px;
 }
 
 .game_banner img {
-    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
     height: 100%;
-    object-fit: cover;
-    object-position: center center;
+    width: auto;
+
+    transform: translate(-50%, -50%);
 }
 
 .treadmill_item .game_name {

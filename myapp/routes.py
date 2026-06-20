@@ -7,8 +7,9 @@ bp = Blueprint("main", __name__)
 def health():
     return jsonify({"status": "ok"})
 
+@bp.route("/admin_painel")
 @bp.route("/admin_painel/<action>", methods=["GET", "POST"])
-def admin_painel(action):
+def admin_painel(action=None):
     from flask import session
     if not "email" in session:
         return "Boboca"
@@ -20,10 +21,10 @@ def admin_painel(action):
     if request.method == "POST":
         if action == "change_role":
             from .services.admin_Service import set_role
-            set_role()
+            return set_role()
         elif action == "games_database":
             from .services.admin_Service import add_game_to_DB
-            add_game_to_DB()
+            return add_game_to_DB()
     
     from .services.generate_pages import generate_admin
     return generate_admin()
@@ -63,3 +64,14 @@ def login():
 @bp.route("/users")
 def users():
     return jsonify({"test": "test Yes"})
+
+@bp.route("/games")
+@bp.route("/games/<gameId>")
+def games(gameId="2215200"):
+    from .services.generate_pages import generate_game
+    return generate_game(gameId)
+
+@bp.route("/search_for_games", methods=["POST"])
+def search_games():
+    
+    return "Lindo"
