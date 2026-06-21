@@ -24,6 +24,9 @@ def search_games():
     steam_data = requests.get(STEAM_ENDPOINT).json()
     
     for game in steam_data["items"]:
+        if str(game["type"]) != "app":
+            continue
+        
         games.append({
         "game_name": game["name"],
         "game_id": game["id"],

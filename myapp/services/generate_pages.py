@@ -67,3 +67,18 @@ def generate_game(gameId="2215200"):
         year_release=year_release,
         game_image=game_image,
         genre=genre)
+
+def generate_search_page(games):    
+    
+    txt = ""
+    for game in games:
+        
+        #if game[]
+        gameId = game["game_id"]
+        game_name = game["game_name"]
+        image_link = game["image_link"]
+        
+        txt += f'<a href="/games/{gameId}"><div class="game_card"><h3>{game_name}</h3><img src="{image_link}" alt=""></div></a>'
+    from flask import render_template, render_template_string
+    #return render_template_string(txt)
+    return render_template("list_games.html", list=txt)

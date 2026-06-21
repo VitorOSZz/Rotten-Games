@@ -74,4 +74,7 @@ def games(gameId="2215200"):
 @bp.route("/search_for_games", methods=["POST"])
 def search_games():
     from .services.search_service import search_games
-    return search_games()
+    from .services.generate_pages import generate_search_page
+    games = search_games()
+    
+    return generate_search_page(games)
