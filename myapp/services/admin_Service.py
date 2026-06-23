@@ -1,10 +1,8 @@
 def set_role():
     from flask import request, session
     email = request.form["email"]
-    if "email" in session:
-        if session["email"] == email:
-            return "You can't change your role."
-    else:
+    
+    if not "email" in session:
         return "Boboca 4"
     
     role = request.form["role"]
