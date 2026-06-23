@@ -58,6 +58,8 @@ def generate_game(gameId="2215200"):
     from .games_services.SteamWebAPI_Service import get_header_image
     game_image = get_header_image(appId)
     
+    review_link = f"{gameId}/review"
+    
     from flask import render_template
     return render_template(
         "game.html",
@@ -66,7 +68,8 @@ def generate_game(gameId="2215200"):
         developer=developer,
         year_release=year_release,
         game_image=game_image,
-        genre=genre)
+        genre=genre,
+        review_link=review_link)
 
 def generate_search_page(games):    
     
@@ -82,3 +85,16 @@ def generate_search_page(games):
     from flask import render_template, render_template_string
     #return render_template_string(txt)
     return render_template("list_games.html", list=txt)
+
+def generate_game_review(gameId: str):
+    from flask import render_template, session
+    from .games_services.SteamWebAPI_Service import get_header_image
+
+    if "email" in session:
+        if session["role"] == "user" or session["role"] == "specialist":
+            game_image = get_header_image(gameId)
+            return render_template("review.html", game_image=game_image, form_action=f"/games/{gameId}/review")
+        else:
+            return "admins can't post a review"
+    
+    return "Error, try login again"

@@ -78,3 +78,13 @@ def search_games():
     games = search_games()
     
     return generate_search_page(games)
+
+@bp.route("/games/<gameId>/review", methods=["GET", "POST"])
+def review(gameId):
+    from .services.generate_pages import generate_game_review
+    
+    if request.method == "POST":
+        from .services.review_service import try_post_review
+        return try_post_review(gameId)
+    
+    return generate_game_review(str(gameId))

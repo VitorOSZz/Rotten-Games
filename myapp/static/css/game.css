@@ -168,12 +168,16 @@ main {
     align-content: center;
 }
 
-#button p {
+#button div {
     color: white;
     font-family: daytona;
     font-weight: bold;
     font-size: 20px;
+}
 
+#button a {
+    all: unset;
+    cursor: pointer;
 }
 
 #reviews {
@@ -232,4 +236,15 @@ main {
     font-family: daytona;
     font-size: 18px;
     color: white;
+}
+
+#chart {
+    width: 400px;
+    height: 400px;
+    border-radius: 30px;
+    background-color: rgb(38, 38, 38);
+}
+
+script {
+    border-radius: 30px;
 }

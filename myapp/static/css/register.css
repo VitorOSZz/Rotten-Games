@@ -76,7 +76,6 @@ header {
 .input input {
     margin: auto;
     width: 300px
-    
 }
 
 #login-button {
@@ -93,13 +92,15 @@ header {
     border-radius: 5px;
     border-style: none;
     margin-top: 20px;
+
+    cursor: pointer;
 }
 
 #already {
     margin-top: 10px;
 }
 
-#already a {
+a #already a {
     margin-top: 10px;
     color: red;
 }

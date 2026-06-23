@@ -1,13 +1,6 @@
 main a {
     all: unset;
     cursor: pointer;
-
-    display: block;
-    margin: auto;
-
-    width: 400px;
-    height: 100px;
-
 }
 
 main .game_card {
@@ -17,7 +10,6 @@ main .game_card {
     background-color: gray;
     width: 400px;
     height: 100px;
-
     margin: auto;
     margin-top: 20px;
     font-size: 18px;

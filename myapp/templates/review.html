@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review</title>
+    <link rel="stylesheet" href="/static/css/review.css">
+</head>
+
+<body>
+    <header>
+        <div id="logo">
+            <img src="/static/img/sprite/logo.png">
+        </div>
+    </header>
+
+    <main>
+        <section id="review">
+            <div id="box">
+                <form action="{{form_action}}" method="post">
+                    <div id="text">
+                        <label for="text_review">Write your review</label>
+                        <input type="text" name="text_review" id="text_review">
+                    </div>
+                    <div id="specs">
+                        <div id="time">
+                            <label for="played_time">time played (hours): </label>
+                            <input type="number" name="played_time" id="played_time">
+                        </div>
+
+                        <div id="point">
+                            <h1>Main point:</h1>
+
+                            <div id="boxes">
+                                <input type="radio" name="main_point" id="graphics" value="Graphics">
+                                <label for="graphics">Graphics</label>
+                                <br>
+
+                                <input type="radio" name="main_point" id="story" value="Story">
+                                <label for="story">Story</label>
+                                <br>
+
+                                <input type="radio" name="main_point" id="multiplayer" value="Multiplayer">
+                                <label for="multiplayer">Multiplayer</label>
+                                <br>
+
+                                <input type="radio" name="main_point" id="playability" value="Playability">
+                                <label for="playability">Playability</label>
+                                <br>
+
+                                <input type="radio" name="main_point" id="none" value="None" checked>
+                                <label for="none">None</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="grade">
+                        <img src="/static/img/sprite/Grades/30_ Critics.png">
+                        <label for="grade"></label>
+                        <input type="range" name="grade" id="tomatoes" min="0" max="10" step="1" value="5">
+                        <img src="/static/img/sprite/logo.png">
+                    </div>
+
+                    <div id="button">
+                        <input type="submit" value="Add review">
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section id="cover">
+            <div id="game_cover">
+                <img src="{{game_image}}">
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>
