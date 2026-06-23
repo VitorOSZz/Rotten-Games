@@ -31,12 +31,12 @@
 
                 <div id="critics_rate">
                     <img src="../static/img/sprite/logo.png">
-                    <h1> xx% </h1>
+                    <h1> {{critic_average}} % </h1>
                 </div>
 
                 <div id="overall_rate">
                     <img src="../static/img/sprite/Grades/100_ Total.png">
-                    <h1> xx% </h1>
+                    <h1> {{user_average}} % </h1>
                 </div>
             </section>
 
@@ -73,42 +73,15 @@
             </div>
         </section>
 
-        <section id="reviews">
-            <div class="review">
-                <div class="top">
-                    <div class="name">
-                        <h1> Name of the person </h1>
-                    </div>
-
-                    <div class="grade">
-                        <img src="../static/img/sprite/logo.png">
-                        <h1>x/10</h1>
-                    </div>
-                </div>
-                <div class="content">
-                    <p>qihefbQEIphibpIGEBAWPUGEBPIGBAWEPUOGBeóugbÉUOGBwuo´gbUOÉkrkrnkrrkmrkmvrlvmlef,wç,lwvmknvkmvlmvlw,cçc,lsmdçlvmdknvs,n sdm, df,m slvnsçkbnfbjfbnsljvds,n vns n sj fm sjf sm, s,m a, a,m .mv ajlv q,nevB´veub</p>
-                </div>
-            </div>
-        </section>
+        <section id="reviews">{{reviews|safe}}</section>
 
         <section id="graphics">
-            <div id="chart">
-                <script>
-                    var trace1 = {
-                        x: [1, 2, 3, 4],
-                        y: [0, 2, 3, 5],
-                        fill: 'tozeroy',
-                        fillcolor: 'rgb(255, 0, 0)',
-                        type: 'scatter',
-                        mode: 'none',
-                        bgcolor: 'none',
-                        fillpatern: 'bgcolor: '
-                    };
+            <div id="chart_1">
+                <script>{{script1|safe}}</script>
+            </div>
 
-                    var data = [trace1];
-
-                    Plotly.newPlot('chart', data);
-                </script>
+            <div id="chart_2">
+                <script>{{script2|safe}}</script>
             </div>
         </section>
 

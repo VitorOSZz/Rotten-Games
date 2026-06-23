@@ -41,26 +41,51 @@ def generate_game(gameId="2215200"):
     appId = gameId
     url = f"https://store.steampowered.com/api/appdetails?appids={appId}"
     
-    import requests
-    response = requests.get(url)
-        
-    game_data = response.json()[str(appId)]["data"]
+    try:
+        import requests
+        response = requests.get(url)
+        game_data = response.json()[str(appId)]["data"]
 
-    game_name = game_data["name"]
-    publisher = game_data["publishers"][0]
-    developer = game_data["developers"][0]
-    year_release = int(game_data["release_date"]["date"][-4:])
-    genre = ", ".join(
-        genre["description"]
-        for genre in game_data["genres"]
+        if game_data is None:
+            raise ValueError("Steam returned None")
+        
+        game_name = game_data["name"]
+        publisher = game_data["publishers"][0]
+        developer = game_data["developers"][0]
+        year_release = int(game_data["release_date"]["date"][-4:])
+        genre = ", ".join(
+            genre["description"]
+            for genre in game_data["genres"]
     )
+        
+    except Exception:
+        from ..supabase import supabase
+        from .general_functions import normalize
+        response = supabase.table("games").select("*").eq("name_normalized", normalize(gameId)).limit(1).execute()
+        
+        if not response.data:
+            return "Error"
+        
+        data = response.data[0]
+        game_name = data["game_name"]
+        publisher = data["publisher"]
+        developer = data["developer"]
+        year_release = data["year_release"]
+        genre = data["genre"]
+    
     
     from .games_services.SteamWebAPI_Service import get_header_image
     game_image = get_header_image(appId)
     
     review_link = f"{gameId}/review"
     
+    from .review_service import get_reviews, reviews_formated
+    get_reviews(gameId)
+    reviews = reviews_formated(gameId)
+    from .review_service import review_script_bar, review_script_pie
+    
     from flask import render_template
+    from .review_service import average_score
     return render_template(
         "game.html",
         game_name=game_name,
@@ -69,7 +94,13 @@ def generate_game(gameId="2215200"):
         year_release=year_release,
         game_image=game_image,
         genre=genre,
-        review_link=review_link)
+        review_link=review_link,
+        reviews = reviews,
+        script1=review_script_bar(gameId),
+        script2=review_script_pie(gameId),
+        user_average=average_score(gameId, "user"),
+        critic_average=average_score(gameId, "specialist")
+        )
 
 def generate_search_page(games):    
     
@@ -89,6 +120,7 @@ def generate_search_page(games):
 def generate_game_review(gameId: str):
     from flask import render_template, session
     from .games_services.SteamWebAPI_Service import get_header_image
+    
 
     if "email" in session:
         if session["role"] == "user" or session["role"] == "specialist":

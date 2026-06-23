@@ -90,7 +90,7 @@ main {
 
 #rating #critics_rate {
     display: inline-flex;
-    width: 250px;
+    width: 270px;
     height: 99px;
     margin-right: 10px;
     align-items: center;
@@ -108,7 +108,7 @@ main {
 
 #rating #overall_rate {
     display: inline-flex;
-    width: 250px;
+    width: 300px;
     height: 99px;
     margin-left: 10px;
     align-items: center;
@@ -191,6 +191,7 @@ main {
     background-color: rgb(38, 38, 38);
     width: 650px;
     margin: auto;
+    margin-top: 20px;
     border-radius: 30px;
 }
 

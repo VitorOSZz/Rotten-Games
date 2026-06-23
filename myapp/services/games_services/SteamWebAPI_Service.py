@@ -25,8 +25,8 @@ def get_new_releases_games(how_many_games: int):
 
 # Tirar esse get header images e botar a logica no generate_pages
 
-def get_header_image(steam_id: str):
-    url = f"https://steamcdn-a.akamaihd.net/steam/apps/{steam_id}/library_600x900_2x.jpg"
+def get_header_image(game_id: str):
+    url = f"https://steamcdn-a.akamaihd.net/steam/apps/{game_id}/library_600x900_2x.jpg"
     
     import requests
 
@@ -35,12 +35,24 @@ def get_header_image(steam_id: str):
     if response.status_code == 200:
         return url
     else:
-        url = f"https://store.steampowered.com/api/appdetails?appids={steam_id}"
+        try:
+            url = f"https://store.steampowered.com/api/appdetails?appids={game_id}"
+
+            response = requests.get(url)
+            data = response.json()[str(game_id)]["data"]
+            header_image = data["header_image"]
+            return header_image
+        except Exception:
+            from ...supabase import supabase
+            from ..general_functions import normalize
+            response = supabase.table("games").select("*").eq("name_normalized", normalize(game_id)).limit(1).execute()
+
+            if not response.data:
+                return "Error"
         
-        response = requests.get(url)
-        data = response.json()[str(steam_id)]["data"]
-        header_image = data["header_image"]
-        return header_image
+            data = response.data[0]
+            header_image = data["image_link"]
+            return header_image
 
 def get_game_names(appIds: list[str]):
     

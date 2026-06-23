@@ -84,7 +84,7 @@ def review(gameId):
     from .services.generate_pages import generate_game_review
     
     if request.method == "POST":
-        from .services.review_service import try_post_review
-        return try_post_review(gameId)
+        from .services.review_service import post_review
+        return post_review(gameId)
     
     return generate_game_review(str(gameId))
