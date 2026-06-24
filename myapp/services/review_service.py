@@ -55,29 +55,14 @@ def reviews_formated(gameId: str):
     from ..supabase import supabase
     
     for review in reviews:
-        response = supabase.table("users").select("name", "role").eq("email", review["creator"]).limit(1).execute()
+        response = supabase.table("users").select("name").eq("email", review["creator"]).limit(1).execute()
         user_name = response.data[0]["name"]
         score = int(review["score"])
         user_text = review["review_text"]
         
-        if review["role"] == "user":
-            if score <= 3:
-                image_link = "../static/img/grades/30_Total.png"
-            elif score <= 5:
-                image_link = "../static/img/grades/50_Total.png"
-            elif score <= 8:
-                image_link = "../static/img/grades/80_Total.png"
-            else:
-                image_link = "../static/img/grades/80_Total.png"
-        if review["role"] == "specialist":
-            if score <= 3:
-                image_link = "../static/img/grades/30_Critics.png"
-            elif score <= 5:
-                image_link = "../static/img/grades/50_Critics.png"
-            elif score <= 8:
-                image_link = "../static/img/grades/80_Critics.png"
-            else:
-                image_link = "../static/img/grades/100_Critics.png"
+        from .general_functions import get_respective_image
+        print(f"Role: {review["role"]}")
+        image_link = get_respective_image(score, review["role"])
         
         text +=f'<div class="review"><div class="top"><div class="name"><h1>{user_name}</h1></div><div class="grade"><img src="{image_link}"><h1>{score}/10</h1></div></div><div class="content"><p>{user_text}</p></div></div>\n'
     

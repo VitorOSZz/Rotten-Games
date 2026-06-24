@@ -101,6 +101,10 @@ def generate_game(gameId="2215200"):
     
     from flask import render_template
     from .review_service import average_score
+    from .general_functions import get_respective_image
+    
+    critic_average_score = average_score(gameId, "specialist")
+    user_average_score = average_score(gameId, "user")
     return render_template(
         "game.html",
         game_name=game_name,
@@ -113,8 +117,10 @@ def generate_game(gameId="2215200"):
         reviews = reviews,
         script1=review_script_bar(gameId),
         script2=review_script_pie(gameId),
-        user_average=average_score(gameId, "user"),
-        critic_average=average_score(gameId, "specialist")
+        user_average=user_average_score,
+        critic_average=critic_average_score,
+        critic_rate=get_respective_image(critic_average_score, "specialist"),
+        user_rate=get_respective_image(user_average_score, "user")
         )
 
 def generate_search_page(games):    
