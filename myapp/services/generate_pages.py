@@ -63,7 +63,6 @@ def generate_game(gameId="2215200"):
         from .general_functions import normalize
         response = supabase.table("games").select("*").eq("name_normalized", normalize(gameId)).limit(1).execute()
         
-        print(f"GAME: {response.data}")
         if not response.data:
             return "Error"
         
