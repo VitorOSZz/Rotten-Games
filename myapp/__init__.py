@@ -7,7 +7,8 @@ def create_app():
     app = Flask(__name__)
     app.register_blueprint(bp)
     
-    from secrets import token_hex
-    app.secret_key = token_hex()
+    import os
+    from dotenv import load_dotenv
+    app.secret_key = os.getenv("SECRET_KEY")
     bcrypt.init_app(app)
     return app
